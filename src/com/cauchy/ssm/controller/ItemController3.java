@@ -31,7 +31,7 @@ public class ItemController3 {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("itemList",itemList);
 		// 指定视图：
-		modelAndView.setViewName("/WEB-INF/jsp/item/itemlist.jsp");
+		modelAndView.setViewName("item/itemlist");
 		return modelAndView;
 	}
 }

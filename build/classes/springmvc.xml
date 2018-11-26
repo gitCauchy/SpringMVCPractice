@@ -38,7 +38,10 @@
 	<!-- 另一个适配器 -->
 	<bean class = "org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
 	<!-- 视图解析器，解析Jsp的视图，默认使用jstl，classpath下要有jstl的包 -->
-	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver"/>
+	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value = "/WEB-INF/jsp/"/>
+		<property name="suffix" value = ".jsp"/>
+	</bean>
 	<!-- 注解映射器 -->
 	<!--bean class = "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/-->
 	<!-- 注解适配器 -->

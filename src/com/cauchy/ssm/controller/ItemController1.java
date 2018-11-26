@@ -31,7 +31,7 @@ public class ItemController1 implements Controller{
 		// 相当于request中的setAttribute方法，在Jsp页面中可以调用来获取数据。
 		modelAndView.addObject("itemList",itemList);
 		// 指定视图：
-		modelAndView.setViewName("/WEB-INF/jsp/item/itemlist.jsp");
+		modelAndView.setViewName("item/itemlist");
 		return modelAndView;
 	}
 }
