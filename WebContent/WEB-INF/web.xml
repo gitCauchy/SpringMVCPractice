@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>SpringMVCPractice</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+	id="WebApp_ID" version="3.0">
+	<display-name>SpringMVCPractice</display-name>
+	<!-- 配置前端控制器 -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- springmvc需要加载的配置文件（配置的处理器映射器、适配器）如果不进行配置，默认加载/WEB-INF/servlet名称-servlet.xml(springmvc-servlet) -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc.xml</param-value>
+		</init-param>
+ 	</servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>springmvc</servlet-name>
+ 		<!-- 第一种*.action访问以.action结尾的由DispatcherServlet进行解析 
+ 			   第二种 / 所有的访问地址都由DispatcheerServlet来解析，对于静态文件的解析，需要配置不让DispatcherServlet来解析
+ 			   	这种可以实现RestFul的风格的URL
+ 			   第三种 /* 这种配置不对，使用这种配置，最终要转发到一个Jsp页面，仍然由DispatcherServlet解析Jsp，不能根据Jsp来找到Handler会报错-->
+ 		<url-pattern>*.action</url-pattern>
+ 	</servlet-mapping>
+ 	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
