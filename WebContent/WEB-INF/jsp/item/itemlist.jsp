@@ -13,6 +13,7 @@
 查询条件：
 <table width="100%" border=1>
 	<tr>
+		<td>商品名称：<input name = "itemCustom.name"></td>
 		<td><input type = "submit" value="查看"/></td>
 	</tr>
 </table>
