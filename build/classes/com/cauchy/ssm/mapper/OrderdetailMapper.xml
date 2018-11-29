@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cauchy.mybatis.mapper.OrderdetailMapper" >
-  <resultMap id="BaseResultMap" type="com.cauchy.mybatis.po.Orderdetail" >
+<mapper namespace="com.cauchy.ssm.mapper.OrderdetailMapper" >
+  <resultMap id="BaseResultMap" type="com.cauchy.ssm.po.Orderdetail" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="item_id" property="itemId" jdbcType="INTEGER" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     id, order_id, item_id, item_num
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cauchy.mybatis.po.OrderdetailExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cauchy.ssm.po.OrderdetailExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,19 +92,19 @@
     delete from orderdetail
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cauchy.mybatis.po.OrderdetailExample" >
+  <delete id="deleteByExample" parameterType="com.cauchy.ssm.po.OrderdetailExample" >
     delete from orderdetail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cauchy.mybatis.po.Orderdetail" >
+  <insert id="insert" parameterType="com.cauchy.ssm.po.Orderdetail" >
     insert into orderdetail (id, order_id, item_id, 
       item_num)
     values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, 
       #{itemNum,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.cauchy.mybatis.po.Orderdetail" >
+  <insert id="insertSelective" parameterType="com.cauchy.ssm.po.Orderdetail" >
     insert into orderdetail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cauchy.mybatis.po.OrderdetailExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.cauchy.ssm.po.OrderdetailExample" resultType="java.lang.Integer" >
     select count(*) from orderdetail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cauchy.mybatis.po.Orderdetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.cauchy.ssm.po.Orderdetail" >
     update orderdetail
     <set >
       <if test="orderId != null" >
@@ -186,7 +186,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cauchy.mybatis.po.Orderdetail" >
+  <update id="updateByPrimaryKey" parameterType="com.cauchy.ssm.po.Orderdetail" >
     update orderdetail
     set order_id = #{orderId,jdbcType=INTEGER},
       item_id = #{itemId,jdbcType=INTEGER},

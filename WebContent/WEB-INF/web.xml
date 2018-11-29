@@ -10,7 +10,7 @@
 		<!-- springmvc需要加载的配置文件（配置的处理器映射器、适配器）如果不进行配置，默认加载/WEB-INF/servlet名称-servlet.xml(springmvc-servlet) -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:springmvc.xml</param-value>
+			<param-value>classpath:spring/springmvc.xml</param-value>
 		</init-param>
  	</servlet>
  	<servlet-mapping>
@@ -29,4 +29,12 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<!-- 加载spring容器 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/spring/applicationContext-*.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 </web-app>
