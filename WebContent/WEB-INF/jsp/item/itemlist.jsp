@@ -7,19 +7,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>商品信息查询</title>
+<script type="text/javascript">
+function deleteItem(){
+	// 提交form
+	document.itemForm.action="${pageContext.request.contextPath}/item/deleteItem.action";
+	document.itemForm.submit();
+}
+function queryItem(){
+	// 提交from
+	document.itemFrom.action="${pageContext.request.contextPath}/item/queryItem.action";
+	document.itemForm.submit();
+}
+</script>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/item/queryItem.action" method = "post">
+<form name = "itemForm" action="${pageContext.request.contextPath}/item/queryItem.action" method = "post">
 查询条件：
 <table width="100%" border=1>
 	<tr>
 		<td>商品名称：<input name = "itemCustom.name"></td>
-		<td><input type = "submit" value="查看"/></td>
+		<td>
+			<input type = "button" value = "查询" onclick = "queryItem()"/>
+			<input type = "button" value = "批量删除" onclick = "deleteItem()"/>
+		</td>
 	</tr>
 </table>
 商品列表：
 <table width = "100%" border = 1>
 	<tr>
+		<td>选择</td>
 		<td>商品名称</td>
 		<td>商品价格</td>
 		<td>生产日期</td>
@@ -28,6 +44,7 @@
 	</tr>
 	<c:forEach items="${itemList}" var ="item">
 		<tr>
+			<td><input type = "checkbox" name = "item_id" value = "${item.id}"></td>
 			<td>${item.name}</td>
 			<td>${item.price}</td>
 			<td><fmt:formatDate value = "${item.creattime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
