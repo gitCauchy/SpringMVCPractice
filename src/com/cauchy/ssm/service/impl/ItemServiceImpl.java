@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cauchy.ssm.po.Item;
 import com.cauchy.ssm.po.ItemCustom;
+import com.cauchy.ssm.exception.CustomException;
 import com.cauchy.ssm.mapper.ItemCustomMapper;
 import com.cauchy.ssm.mapper.ItemMapper;
 import com.cauchy.ssm.po.ItemQueryVo;
@@ -23,9 +24,12 @@ public class ItemServiceImpl implements ItemService{
 		return itemCustomMapper.findItemList(itemQueryVo);
 	}
 	public ItemCustom findItemById(int id) throws Exception{
-		Item Item = itemMapper.selectByPrimaryKey(id);
-		ItemCustom itemCustom = new ItemCustom();
-		BeanUtils.copyProperties(Item, itemCustom);
+		Item item = itemMapper.selectByPrimaryKey(id);
+		ItemCustom itemCustom = null;
+		if(item != null) {
+			itemCustom = new ItemCustom();
+			BeanUtils.copyProperties(item, itemCustom);
+		}
 		return itemCustom;
 	}
 	public void updateItem(Integer id,ItemCustom itemCustom) throws Exception{

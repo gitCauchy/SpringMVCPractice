@@ -10,12 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cauchy.ssm.controller.validation.ValidGroup1;
+import com.cauchy.ssm.exception.CustomException;
 import com.cauchy.ssm.po.ItemCustom;
 import com.cauchy.ssm.po.ItemQueryVo;
 import com.cauchy.ssm.service.ItemService;
@@ -40,6 +44,10 @@ public class ItemController {
 	public String editItem(Model model,@RequestParam(value = "id",required = true) Integer id) throws Exception{
 		// 调用service来查询商品信息：
 		ItemCustom itemCustom = itemService.findItemById(id);
+		// 判断商品是否为空：
+		if(itemCustom == null) {
+			throw new CustomException("修改的商品信息不存在");
+ 		}
 		// 将商品信息放到model中：
 		model.addAttribute("itemCustom",itemCustom);
 		return "item/edititem";
@@ -72,7 +80,7 @@ public class ItemController {
 		// 调用service更新商品信息：
 		itemService.updateItem(id, itemCustom);
 		// 进行重定向
-		return "forward:queryItem.action";
+		return "item/edititem";
 	}
 //	// 商品修改提交后重定向到查询页面：
 //	@RequestMapping("/editItemSubmit.action")
@@ -106,6 +114,21 @@ public class ItemController {
 	public String editItemAllSubmit(ItemQueryVo itemQueryVo) throws Exception{
 		// .....
 		return "success";
+	}
+	@RequestMapping("/requestJson")
+	public @ResponseBody ItemCustom requestJson(@RequestBody ItemCustom itemCustom){
+		return itemCustom;
+	}
+	@RequestMapping("/responseJson")
+	public @ResponseBody ItemCustom responseJson(ItemCustom itemCustom){
+		return itemCustom;
+	}
+	// RESTful查询商品信息，输出Json
+	@RequestMapping("/itemView/{id}")
+	public @ResponseBody ItemCustom itemView(@PathVariable("id") Integer id) throws Exception{
+		// 调用service来查询商品信息
+		ItemCustom itemCustom = itemService.findItemById(id);
+		return itemCustom;
 	}
 	
 }

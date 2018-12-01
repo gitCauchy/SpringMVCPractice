@@ -42,4 +42,15 @@
 		<!-- 资源文件内容缓存时间 -->
 		<property name="cacheSeconds" value = "120"/>
 	</bean>
+	<bean class = "com.cauchy.ssm.exception.CustomExceptionResolver"/>
+	<!-- jackSon配置 -->
+	<bean class = "org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value ="1"/>
+		<property name="defaultViews">
+			<list>
+				<!-- json View -->
+				<bean class = "org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+			</list>
+		</property>
+	</bean>
 </beans>
