@@ -53,4 +53,11 @@
 			</list>
 		</property>
 	</bean>
+	<mvc:interceptors>
+		<!-- 多个拦截器顺序执行 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**/"/>
+			<bean class = "com.cauchy.ssm.intercepter.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
