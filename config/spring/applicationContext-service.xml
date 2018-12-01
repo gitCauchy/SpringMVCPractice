@@ -16,6 +16,6 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-	<!-- 商品管理的service -->
-	<bean id = "itemService" class = "com.cauchy.ssm.service.impl.ItemServiceImpl"></bean>      
+	<!--商品管理的service -->
+	<bean id = "itemService" class = "com.cauchy.ssm.service.impl.ItemServiceImpl"/>
 </beans>

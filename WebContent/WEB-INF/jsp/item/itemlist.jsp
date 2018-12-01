@@ -9,13 +9,13 @@
 <title>商品信息查询</title>
 <script type="text/javascript">
 function deleteItem(){
-	// 提交form
+	// 提交form:
 	document.itemForm.action="${pageContext.request.contextPath}/item/deleteItem.action";
 	document.itemForm.submit();
 }
 function queryItem(){
-	// 提交from
-	document.itemFrom.action="${pageContext.request.contextPath}/item/queryItem.action";
+	// 提交form
+	document.itemForm.action="${pageContext.request.contextPath}/item/queryItem.action";
 	document.itemForm.submit();
 }
 </script>
@@ -28,7 +28,7 @@ function queryItem(){
 		<td>商品名称：<input name = "itemCustom.name"></td>
 		<td>
 			<input type = "button" value = "查询" onclick = "queryItem()"/>
-			<input type = "button" value = "批量删除" onclick = "deleteItem()"/>
+			<input type = "button" value = "删除" onclick = "deleteItem()"/>
 		</td>
 	</tr>
 </table>

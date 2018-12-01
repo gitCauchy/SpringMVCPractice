@@ -34,12 +34,14 @@ function queryItem(){
 		<tr>
 			<td>商品名称</td>
 			<td>商品价格</td>
+			<td>生产日期</td>
 			<td>商品概述</td>
 		</tr>
 		<c:forEach items = "${itemList}" var = "item" varStatus="status">
 		<tr>
 			<td><input name = "itemList[${status.index}].name" value = "${item.name}"/></td>
 			<td><input name = "itemList[${status.index}].price" value = "${item.price}"/></td>
+			<td><input name = "itemList[${status.index}].creattime" value = "${item.creattime}"/></td>
 			<td><input name = "itemList[${status.index}].detail" value = "${item.detail}"/></td>
 		</tr>
 		</c:forEach>

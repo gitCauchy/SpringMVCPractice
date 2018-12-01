@@ -9,10 +9,6 @@
 <title>修改商品信息</title>
 </head>
 <body>
-<!-- <!-- 显示错误信息 --> -->
-<%-- <c:forEach items="${allErrors}" var="error"> --%>
-<%-- 	${error.defaultMessage} --%>
-<%-- </c:forEach> --%>
 <form id = "itemForm" action="${pageContext.request.contextPath}/item/editItemSubmit.action" method = "post">
 	<input type = "hidden" name = "id" value = "${itemCustom.id}">
 	修改商品信息

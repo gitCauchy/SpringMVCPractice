@@ -16,10 +16,10 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-    <!-- 加载数据库配置文件中的db.properties文件中的以key，命名要有一定的规则 -->
+	<!-- 加载数据库配置文件中的内容，db.properties文件中key命名有一定的规则 -->
 	<context:property-placeholder location = "classpath:db.properties"/>
 	<!-- 配置数据源 -->
-	<bean id = "dataSource" class = "org.apache.commons.dbcp.BasicDataSource" >
+	<bean id = "dataSource" class = "org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value = "${jdbc.driver}"/>
 		<property name="url" value = "${jdbc.url}"/>
 		<property name="username" value = "${jdbc.username}"/>
@@ -28,14 +28,17 @@
 		<property name="maxIdle" value = "5"/>
 	</bean>
 	<!-- sqlSessionFactory -->
-	<bean id = "sqlSessionFacoty" class = "org.mybatis.spring.SqlSessionFactoryBean">
-		<!-- 加载mybatis的配置文件 -->
+	<bean id = "sqlSessionFactory" class = "org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 加载mybatis配置文件 -->
 		<property name="configLocation" value = "classpath:mybatis/sqlMapConfig.xml"/>
+		<!-- dataSource -->
 		<property name="dataSource" ref = "dataSource"/>
 	</bean>
 	<!-- mapper扫描器 -->
 	<bean class = "org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 指定扫描的包名 sqlMapConfig中引包可以去掉需要遵循xml和Java在同一个目录中，自动扫描出来的mapper的bean的id为mapper的类名
+		如果扫描多个包，可以用逗号隔开 -->
 		<property name="basePackage" value = "com.cauchy.ssm.mapper"/>
-		<property name="sqlSessionFactoryBeanName" value = "sqlSessionFacoty"/>
+		<property name="sqlSessionFactoryBeanName" value = "sqlSessionFactory"/>
 	</bean>
 </beans>

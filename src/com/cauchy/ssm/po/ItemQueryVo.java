@@ -3,12 +3,13 @@ package com.cauchy.ssm.po;
 import java.util.List;
 
 public class ItemQueryVo {
-	// 商品信息包装进来
+	// 将商品信息包装进来
 	private Item item;
-	// 为了系统的可扩展性，一般对原始的po进行扩展
+	// 为了系统的扩展性，对源po进行扩展
 	private ItemCustom itemCustom;
-	// 产品批量信息
+	// 批量商品信息：
 	private List<ItemCustom> itemList;
+	
 	public Item getItem() {
 		return item;
 	}
