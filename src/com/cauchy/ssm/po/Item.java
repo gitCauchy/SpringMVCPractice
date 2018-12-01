@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class Item {
     private Integer id;
-    
+    @Size(min = 1,max = 30,message = "{item.name.length.error}")
     private String name;
 
     private Float price;

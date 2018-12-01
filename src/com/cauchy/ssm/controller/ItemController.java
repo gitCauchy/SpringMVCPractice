@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,23 +43,36 @@ public class ItemController {
 		model.addAttribute("itemCustom",itemCustom);
 		return "item/edititem";
 	}
-	// 商品修改提交
+//	// 商品修改提交-ModelAndView
+//	@RequestMapping("/editItemSubmit.action")
+//	public ModelAndView editItemSubmit()throws Exception{
+//		// 调用service更新商品信息：
+//		
+//		// 返回ModelAndView:
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("success");
+//		return modelAndView;
+//	}
+	// 商品修改提交，返回视图名方法：
 	@RequestMapping("/editItemSubmit.action")
-	public ModelAndView editItemSubmit()throws Exception{
+	public String editItemSubmit(Model model,HttpServletRequest request,Integer id, 
+			@Validated ItemCustom itemCustom, BindingResult bindingResult)throws Exception{
+		// 获取校验错误信息：
+		if(bindingResult.hasErrors()) {
+			// 输出错误信息：
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+			for(ObjectError objectError : allErrors) {
+				System.out.println(objectError.getDefaultMessage());
+			}
+			// 错误信息输出到页面：
+			model.addAttribute("allErrors",allErrors);
+			return "item/edititem";
+		}
 		// 调用service更新商品信息：
-		
-		// 返回ModelAndView:
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("success");
-		return modelAndView;
+		itemService.updateItem(id, itemCustom);
+		// 进行重定向
+		return "forward:queryItem.action";
 	}
-//	// 商品修改提交，返回视图名方法：
-//		@RequestMapping("/editItemSubmit.action")
-//		public String editItemSubmit()throws Exception{
-//			// 调用service更新商品信息：
-//			// 返回视图名
-//			return "success";
-//		}
 //	// 商品修改提交后重定向到查询页面：
 //	@RequestMapping("/editItemSubmit.action")
 //	public String editItemSubmit()throws Exception{
