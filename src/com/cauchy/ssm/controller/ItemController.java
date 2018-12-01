@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cauchy.ssm.controller.validation.ValidGroup1;
 import com.cauchy.ssm.po.ItemCustom;
 import com.cauchy.ssm.po.ItemQueryVo;
 import com.cauchy.ssm.service.ItemService;
@@ -56,7 +57,7 @@ public class ItemController {
 	// 商品修改提交，返回视图名方法：
 	@RequestMapping("/editItemSubmit.action")
 	public String editItemSubmit(Model model,HttpServletRequest request,Integer id, 
-			@Validated ItemCustom itemCustom, BindingResult bindingResult)throws Exception{
+			@Validated(value = {ValidGroup1.class}) ItemCustom itemCustom, BindingResult bindingResult)throws Exception{
 		// 获取校验错误信息：
 		if(bindingResult.hasErrors()) {
 			// 输出错误信息：
